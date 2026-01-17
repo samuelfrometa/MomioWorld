@@ -123,14 +123,14 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 22,
-    fontWeight: "700",
-    color: "#F7463B",
+    fontWeight: "800",
+    color: "#4d8aed",
   },
 
   titleLine: {
     width: 40,
     height: 4,
-    backgroundColor: "#F7463B",
+    backgroundColor: "#4d8aed",
     borderRadius: 2,
     marginVertical: 4,
   },
