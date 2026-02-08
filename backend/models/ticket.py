@@ -33,6 +33,10 @@ class Ticket(Base):
         nullable=False
     )
 
+    rate = Column(Integer, nullable = False)  
+
+    favorite = Column(Boolean, nullable=False, server_default="false")
+
     updated_at = Column(
         DateTime(timezone=True),
         server_default=func.now(),

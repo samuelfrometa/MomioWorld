@@ -7,8 +7,10 @@ class TicketBase(BaseModel):
     movie_title: str
     cinema_name: str
     room: Optional[int] = None
-    seat: Optional[str] = None
+    seat: Optional[int] = None
     date: datetime
+    rate: Optional[int] = None
+    favorite: Optional[bool] = False
     ticket_image_url: Optional[str] = None
 
 
