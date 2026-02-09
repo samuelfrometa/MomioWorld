@@ -3,20 +3,14 @@ import {
   Text,
   StyleSheet,
   Image,
-  Animated,
-  ImageSourcePropType,
   TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useMemo, useRef, useEffect } from "react";
+import { useMemo } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { Link, useRouter } from "expo-router";
-import Home from ".";
+import { useRouter } from "expo-router";
 
-const AnimatedLinearGradient =
-  Animated.createAnimatedComponent(LinearGradient);
-
-const images: ImageSourcePropType[] = [
+const images = [
   require("../assets/images/imagen_1.jpeg"),
   require("../assets/images/imagen_2.jpeg"),
   require("../assets/images/imagen_3.jpeg"),
@@ -29,43 +23,15 @@ const images: ImageSourcePropType[] = [
 export default function Splash() {
   const router = useRouter();
 
-  const shuffledImages = useMemo<ImageSourcePropType[]>(() => {
+  const shuffledImages = useMemo(() => {
     return [...images].sort(() => Math.random() - 0.5);
   }, []);
 
-  const gradientAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    Animated.loop(
-      Animated.timing(gradientAnim, {
-        toValue: 1,
-        duration: 6000,
-        useNativeDriver: false,
-      })
-    ).start();
-  }, [gradientAnim]);
-
-  const start = {
-    x: gradientAnim.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 1],
-    }),
-    y: 0,
-  };
-
-  const end = {
-    x: gradientAnim.interpolate({
-      inputRange: [0, 1],
-      outputRange: [1, 0],
-    }),
-    y: 1,
-  };
-
   return (
-    <AnimatedLinearGradient
+    <LinearGradient
       colors={["#e6f4ff", "#8fd3ff", "#4bb3ff"]}
-      start={start}
-      end={end}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
       style={styles.container}
     >
       <SafeAreaView style={styles.safeArea}>
@@ -75,7 +41,7 @@ export default function Splash() {
               key={index}
               style={[
                 styles.polaroid,
-                styles[`p${index + 1}` as keyof typeof styles],
+                styles[`p${index + 1}`],
               ]}
             >
               <View style={styles.photoWrapper}>
@@ -100,7 +66,7 @@ export default function Splash() {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
-    </AnimatedLinearGradient>
+    </LinearGradient>
   );
 }
 
